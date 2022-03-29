@@ -13,11 +13,10 @@ const Input = ({ setImagePath }) => {
           console.log("fklgn");
         }}
       >
-        <label for="image">Choisissez une image : </label>
+        <label>Choisissez une image : </label>
         <input
           type="file"
           onChange={handleChange}
-          name="image"
           accept="image/png, image/jpeg"
         />
       </form>
