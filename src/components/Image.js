@@ -1,17 +1,16 @@
-import "../css/Image.css"
+import "../css/Image.css";
 
-const Image = ({imagePath}) => {
-
-    console.log(imagePath)
-
+const Image = ({ imagePath }) => {
   return (
     <div>
-      <h2>Votre image</h2>
-      {imagePath === null ? <p>Vous n'avez pas encore choisi d'image</p> : <img src={imagePath} /> }
-     
+      <h3>Votre image</h3>
+      {imagePath === null ? (
+        <p>Vous n'avez pas encore choisi d'image</p>
+      ) : (
+        <img src={imagePath} />
+      )}
     </div>
   );
 };
-
 
 export default Image;

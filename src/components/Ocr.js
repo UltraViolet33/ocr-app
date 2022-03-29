@@ -1,8 +1,8 @@
-import Tesseract from "tesseract.js";
-const Ocr = () => {
+const Ocr = ({ text }) => {
   return (
     <div>
-      <p>OCR</p>
+      <h3>Texte extrait de l'image</h3>
+      {text === null ? <p>Aucun texte</p> : <p>{text}</p>}
     </div>
   );
 };
