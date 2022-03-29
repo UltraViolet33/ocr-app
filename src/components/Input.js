@@ -1,4 +1,5 @@
 import "../css/Input.css";
+
 const Input = ({ setImage }) => {
   return (
     <div className="formContainer">
