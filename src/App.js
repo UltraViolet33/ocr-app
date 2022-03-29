@@ -1,16 +1,18 @@
 import Header from "./components/Header";
 import Input from "./components/Input";
 import Ocr from "./components/Ocr";
+import Image from "./components/Image";
 import { useState } from "react";
 
 function App() {
-  const [image, setImage] = useState(null);
+  const [imagePath, setImagePath] = useState(null);
 
   return (
     <div className="App">
       <Header></Header>
-      <Input setImage={setImage}></Input>
+      <Input setImagePath={setImagePath}></Input>
       <Ocr></Ocr>
+      <Image imagePath={imagePath}/>
     </div>
   );
 }
