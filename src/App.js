@@ -1,35 +1,27 @@
-import { useState } from "react";
-import Tesseract from "tesseract.js";
 import { createWorker } from "tesseract.js";
-
+import { saveAs } from "file-saver";
+import { useState } from "react";
 import Header from "./components/Header";
 import Input from "./components/Input";
 import Ocr from "./components/Ocr";
 import Image from "./components/Image";
-
 import "./App.css";
 
 function App() {
+
+  //STATES
   const [imagePath, setImagePath] = useState(null);
   const [text, setText] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
+  const [url, setUrl] = useState("");
 
   const worker = createWorker({
     logger: (m) => console.log(m),
   });
 
+  //display text from image
   const displayText = () => {
     if (imagePath !== null) {
-      // setText("Chargement...");
-      // Tesseract.recognize(imagePath, "fra", { logger: (m) => console.log(m) })
-      //   .then((result) => {
-      //     console.log(result.data.text);
-      //     setText(result.data.text);
-      //   })
-      //   .catch((err) => {
-      //     console.log(err);
-      //     setText("Inpossible de convertir le texte de l'image");
-      //   });
       (async () => {
         await worker.load();
         await worker.loadLanguage("eng");
@@ -37,7 +29,7 @@ function App() {
         const {
           data: { text },
         } = await worker.recognize(imagePath);
-        console.log(text);
+
         setText(text);
         const { data } = await worker.getPDF("Tesseract OCR Result");
         const blob = new Blob([new Uint8Array(data)], {
@@ -45,23 +37,26 @@ function App() {
         });
 
         const url = URL.createObjectURL(blob);
-        console.log(url);
+        setUrl(url);
         setBtnDisabled(false);
-        //  await worker.terminate();
+        await worker.terminate();
       })();
     } else {
       alert("Uploadez une image !");
     }
   };
 
-  const downloadPDF = () => {};
+  //create pdf file
+  const saveFile = (url) => {
+    saveAs(url, "example.pdf");
+  };
 
   return (
     <div className="App">
       <Header></Header>
       <Input setImagePath={setImagePath}></Input>
       <button onClick={displayText}>Afficher le texte</button>
-      <button onClick={downloadPDF} disabled={btnDisabled}>
+      <button onClick={() => saveFile(url)} disabled={btnDisabled}>
         Télécharger le PDF
       </button>
       <div className="flex">
