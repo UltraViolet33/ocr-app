@@ -2,6 +2,7 @@ import { createWorker } from "tesseract.js";
 import { saveAs } from "file-saver";
 import { useState } from "react";
 import Header from "./components/Header";
+import WebcamCapture from "./components/WebcamCapture";
 import Input from "./components/Input";
 import Buttons from "./components/Buttons";
 import Result from "./components/Result";
@@ -54,7 +55,8 @@ function App() {
   return (
     <div className="App">
       <Header></Header>
-      <Input setImagePath={setImagePath}></Input>
+      {/* <Input setImagePath={setImagePath}></Input> */}
+      <WebcamCapture/>
       <Buttons
         displayText={displayText}
         saveFile={saveFile}
