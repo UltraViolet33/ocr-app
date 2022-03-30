@@ -3,12 +3,11 @@ import { saveAs } from "file-saver";
 import { useState } from "react";
 import Header from "./components/Header";
 import Input from "./components/Input";
-import Ocr from "./components/Ocr";
-import Image from "./components/Image";
+import Buttons from "./components/Buttons";
+import Result from "./components/Result";
 import "./App.css";
 
 function App() {
-
   //STATES
   const [imagePath, setImagePath] = useState(null);
   const [text, setText] = useState("");
@@ -56,18 +55,13 @@ function App() {
     <div className="App">
       <Header></Header>
       <Input setImagePath={setImagePath}></Input>
-      <button onClick={displayText}>Afficher le texte</button>
-      <button onClick={() => saveFile(url)} disabled={btnDisabled}>
-        Télécharger le PDF
-      </button>
-      <div className="flex">
-        <div>
-          <Image imagePath={imagePath} />
-        </div>
-        <div style={{ width: "50%" }}>
-          <Ocr text={text} />
-        </div>
-      </div>
+      <Buttons
+        displayText={displayText}
+        saveFile={saveFile}
+        url={url}
+        btnDisabled={btnDisabled}
+      />
+      <Result imagePath={imagePath} text={text}></Result>
     </div>
   );
 }
