@@ -1,5 +1,3 @@
-import "../css/Image.css";
-
 const Image = ({ imagePath }) => {
   return (
     <div>

@@ -14,6 +14,7 @@ function App() {
   const [text, setText] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [url, setUrl] = useState("");
+  const [webcam, setWebcam] = useState(false);
 
   const worker = createWorker({
     logger: (m) => console.log(m),
@@ -52,11 +53,23 @@ function App() {
     saveAs(url, "example.pdf");
   };
 
+  const method = () => {
+    setWebcam(!webcam);
+    setImagePath(null);
+    setText("");
+    setBtnDisabled(true);
+    setUrl("");
+  }
+
   return (
     <div className="App">
       <Header></Header>
-      {/* <Input setImagePath={setImagePath}></Input> */}
-      <WebcamCapture/>
+      <button onClick={method}>{webcam ? "Utiliser formulaire" : "Utiliser webcam"}</button>
+      {webcam ? (
+        <WebcamCapture setImagePath={setImagePath} />
+      ) : (
+        <Input setImagePath={setImagePath}></Input>
+      )}
       <Buttons
         displayText={displayText}
         saveFile={saveFile}

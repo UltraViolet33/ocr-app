@@ -1,8 +1,5 @@
-import  { useCallback, useRef } from 'react'
+import { useCallback, useRef } from "react";
 import Webcam from "react-webcam";
-
-
-const WebcamComponent = () => <Webcam />;
 
 const videoConstraints = {
   width: 1280,
@@ -10,11 +7,12 @@ const videoConstraints = {
   facingMode: "user",
 };
 
-const WebcamCapture = () => {
+const WebcamCapture = ({ setImagePath }) => {
   const webcamRef = useRef(null);
 
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
+    setImagePath(imageSrc);
   }, [webcamRef]);
 
   return (
@@ -29,14 +27,14 @@ const WebcamCapture = () => {
       />
       <button
         onClick={(e) => {
-          e.preventDefault(); capture();
+          e.preventDefault();
+          capture();
         }}
       >
-        Capture
+        Prendre une photo
       </button>
     </div>
   );
 };
-
 
 export default WebcamCapture;
