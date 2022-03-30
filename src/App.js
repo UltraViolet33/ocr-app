@@ -22,6 +22,7 @@ function App() {
   //display text from image
   const displayText = () => {
     if (imagePath !== null) {
+      setText("Chargement...");
       (async () => {
         await worker.load();
         await worker.loadLanguage("eng");
