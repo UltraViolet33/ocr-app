@@ -1,4 +1,6 @@
-const Ocr = ({ text }) => {
+import ProgressBar from "./ProgressBar";
+
+const Ocr = ({ text, percent }) => {
   return (
     <div>
       <h3>Texte extrait de l'image</h3>
@@ -7,6 +9,7 @@ const Ocr = ({ text }) => {
       ) : (
         <p style={{ textAlign: "justify" }}>{text}</p>
       )}
+      <ProgressBar width={300} percent={percent} />
     </div>
   );
 };

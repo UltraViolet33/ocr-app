@@ -15,9 +15,15 @@ function App() {
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [url, setUrl] = useState("");
   const [webcam, setWebcam] = useState(false);
+  const [percent, setPercent] = useState(0);
 
   const worker = createWorker({
-    logger: (m) => console.log(m),
+    logger: (m) => {
+      // console.log(m);
+      if (m.status === "recognizing text") {
+        setPercent(m.progress);
+      }
+    },
   });
 
   //display text from image
@@ -59,12 +65,14 @@ function App() {
     setText("");
     setBtnDisabled(true);
     setUrl("");
-  }
+  };
 
   return (
     <div className="App">
       <Header></Header>
-      <button onClick={method}>{webcam ? "Utiliser formulaire" : "Utiliser webcam"}</button>
+      <button onClick={method}>
+        {webcam ? "Utiliser formulaire" : "Utiliser webcam"}
+      </button>
       {webcam ? (
         <WebcamCapture setImagePath={setImagePath} />
       ) : (
@@ -76,7 +84,7 @@ function App() {
         url={url}
         btnDisabled={btnDisabled}
       />
-      <Result imagePath={imagePath} text={text}></Result>
+      <Result imagePath={imagePath} text={text} percent={percent}></Result>
     </div>
   );
 }
