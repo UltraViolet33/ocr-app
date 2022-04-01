@@ -20,8 +20,16 @@ function App() {
   const worker = createWorker({
     logger: (m) => {
       // console.log(m);
-      if (m.status === "recognizing text") {
-        setPercent(m.progress);
+      if (m.status === "loading tesseract core") {
+        setPercent(0.2);
+      } else if (m.status === "initialized tesseract") {
+        setPercent(0.3);
+      } else if (m.status === "loading langage traineddata") {
+        setPercent(0.4);
+      } else if (m.status === "initialized api") {
+        setPercent(0.5);
+      } else if (m.status === "recognizing text") {
+        setPercent(m.progress / 2 + 0.5);
       }
     },
   });
