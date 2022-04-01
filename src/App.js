@@ -16,10 +16,12 @@ function App() {
   const [url, setUrl] = useState("");
   const [webcam, setWebcam] = useState(false);
   const [percent, setPercent] = useState(0);
+  const [status, setStatus] = useState("");
 
   const worker = createWorker({
     logger: (m) => {
       // console.log(m);
+      setStatus(m.status);
       if (m.status === "loading tesseract core") {
         setPercent(0.2);
       } else if (m.status === "initialized tesseract") {
@@ -92,7 +94,7 @@ function App() {
         url={url}
         btnDisabled={btnDisabled}
       />
-      <Result imagePath={imagePath} text={text} percent={percent}></Result>
+      <Result imagePath={imagePath} text={text} percent={percent} status={status}></Result>
     </div>
   );
 }

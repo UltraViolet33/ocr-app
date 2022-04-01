@@ -1,6 +1,6 @@
 import ProgressBar from "./ProgressBar";
 
-const Ocr = ({ text, percent }) => {
+const Ocr = ({ text, percent, status }) => {
   let style = "";
   text === "Chargement..." ? (style = "center") : (style = "justify");
 
@@ -12,7 +12,14 @@ const Ocr = ({ text, percent }) => {
       ) : (
         <div>
           <p style={{ textAlign: style }}>{text}</p>
-          {percent < 1 ? <ProgressBar width={300} percent={percent} /> : ""}
+          {percent < 1 ? (
+            <div>
+              <p>{status}</p>
+              <ProgressBar width={300} percent={percent} />{" "}
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       )}
     </div>
