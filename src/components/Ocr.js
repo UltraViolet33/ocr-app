@@ -7,9 +7,11 @@ const Ocr = ({ text, percent }) => {
       {text === "" ? (
         <p>Aucun texte</p>
       ) : (
-        <p style={{ textAlign: "justify" }}>{text}</p>
+        <div>
+          <p style={{ textAlign: "justify" }}>{text}</p>
+          <ProgressBar width={300} percent={percent} />
+        </div>
       )}
-      <ProgressBar width={300} percent={percent} />
     </div>
   );
 };

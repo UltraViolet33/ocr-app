@@ -1,5 +1,4 @@
 const Buttons = ({ displayText, saveFile, url, btnDisabled }) => {
-  
   const confirm = (message, method, args = null) => {
     if (window.confirm(message)) {
       method(args);

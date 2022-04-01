@@ -21,6 +21,19 @@ p {
 button {
   display: block;
   margin: auto;
+  background-color: #eeeaea;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: rgb(236, 228, 228);
 }
 
 .webcam-container {
