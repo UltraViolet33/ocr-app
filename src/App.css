@@ -36,6 +36,11 @@ button:hover {
   background-color: rgb(236, 228, 228);
 }
 
+button:disabled {
+  background-color: grey;
+  cursor: default;
+}
+
 .webcam-container {
   display: flex;
   flex-direction: column;

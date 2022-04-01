@@ -1,4 +1,4 @@
-import { createWorker } from "tesseract.js";
+import { createWorker, createScheduler } from "tesseract.js";
 import { saveAs } from "file-saver";
 import { useState } from "react";
 import Header from "./components/Header";
@@ -17,6 +17,7 @@ function App() {
   const [webcam, setWebcam] = useState(false);
   const [percent, setPercent] = useState(0);
   const [status, setStatus] = useState("");
+  const [confidence, setConfidence] = useState(null);
 
   const worker = createWorker({
     logger: (m) => {
@@ -45,15 +46,15 @@ function App() {
         await worker.loadLanguage("eng");
         await worker.initialize("eng");
         const {
-          data: { text },
+          data: { text, confidence },
         } = await worker.recognize(imagePath);
-
         setText(text);
+        setConfidence(confidence);
+        // console.log(confidence);
         const { data } = await worker.getPDF("Tesseract OCR Result");
         const blob = new Blob([new Uint8Array(data)], {
           type: "application/pdf",
         });
-
         const url = URL.createObjectURL(blob);
         setUrl(url);
         setBtnDisabled(false);
@@ -66,7 +67,11 @@ function App() {
 
   //create pdf file
   const saveFile = (url) => {
-    saveAs(url, "example.pdf");
+    if (imagePath === null) {
+      alert("Uploadez une image !");
+    } else {
+      saveAs(url, "example.pdf");
+    }
   };
 
   const method = () => {
@@ -94,9 +99,14 @@ function App() {
         url={url}
         btnDisabled={btnDisabled}
       />
-      <Result imagePath={imagePath} text={text} percent={percent} status={status}></Result>
+      <Result
+        imagePath={imagePath}
+        text={text}
+        percent={percent}
+        status={status}
+        confidence={confidence}
+      ></Result>
     </div>
   );
 }
-
 export default App;
