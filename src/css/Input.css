@@ -1,0 +1,29 @@
+.formContainer {
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: #b8b8b8;
+  padding: 20px;
+  max-width: 440px;
+  margin: 20px auto;
+  width: 100%;
+}
+
+input[type="file"] {
+  background-color: #eeeaea;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+}
+
+input[type="submit"] {
+  background-color: #1255a2;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
